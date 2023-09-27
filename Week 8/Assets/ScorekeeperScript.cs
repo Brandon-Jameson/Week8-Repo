@@ -17,4 +17,5 @@ public class ScorekeeperScript : MonoBehaviour
         Debug.Log("Collected!");
         score+= onPickScore;
     }
+
 }
