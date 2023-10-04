@@ -37,6 +37,7 @@ void OnDisable()
     void Update()
     {
         float acceleration = movementAction.ReadValue<Vector2>().y;
+        Vector3 movementDirection = new Vector3(movementAction.ReadValue<Vector2>().x, 0, movementAction.ReadValue<Vector2>().y);
         transform.Translate(Vector3.forward * playerspeed * acceleration * Time.deltaTime, Space.Self); 
     }
 }
