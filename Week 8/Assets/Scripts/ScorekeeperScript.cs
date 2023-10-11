@@ -5,17 +5,29 @@ using UnityEngine;
 public class ScorekeeperScript : MonoBehaviour
 {
     [SerializeField] private int onPickScore;
-    private int score;
-    public int Score
+    private int blueScore;
+    public int BlueScore
     {
-        get { return score; }
-        set { score = value; }
+        get { return blueScore; }
+        set { blueScore = value; }
+    }
+    private int redScore;
+    public int RedScore
+    {
+        get { return redScore; }
+        set { redScore = value; }
     }
 
-    public void OnPickup()
+    public void OnPickupBlue()
     {
-        score += onPickScore;
-        Debug.Log("Score: " + score);
+        blueScore += onPickScore;
+        Debug.Log("Blue player collected");
+    }
+
+    public void OnPickupRed()
+    {
+        redScore += onPickScore;
+         Debug.Log("Red player collected");
     }
 
 }
