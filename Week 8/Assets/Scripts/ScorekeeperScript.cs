@@ -14,8 +14,8 @@ public class ScorekeeperScript : MonoBehaviour
 
     public void OnPickup()
     {
-        Debug.Log("Collected!");
-        score+= onPickScore;
+        score += onPickScore;
+        Debug.Log("Score: " + score);
     }
 
 }
