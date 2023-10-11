@@ -8,17 +8,22 @@ using TMPro;
 public class UIManager : MonoBehaviour
 {
     private ScorekeeperScript scoreKeeper;
-    private int score;
-    private TMP_Text scoreText;
+    private int blueScore;
+    private int redScore;
+    private TMP_Text scoreTextBlue;
+    private TMP_Text scoreTextRed;
     private void Start()
     {
         scoreKeeper = GameObject.Find("_ScoreKeeper").GetComponent<ScorekeeperScript>();
-        scoreText = GameObject.Find("ScoreText").GetComponent<TMP_Text>();
+        scoreTextBlue = GameObject.Find("ScoreTextBlue").GetComponent<TMP_Text>();
+        scoreTextRed = GameObject.Find("ScoreTextRed").GetComponent<TMP_Text>();
     }
 
     private void Update()
     {
-        score = scoreKeeper.Score;
-        scoreText.text = "Player 1 Score: " + score;
+        blueScore = scoreKeeper.BlueScore;
+        redScore = scoreKeeper.RedScore;
+        scoreTextBlue.text = "Player 1 Score: " + blueScore;
+        scoreTextRed.text = "Player 2 Score: " + redScore;
     }
 }

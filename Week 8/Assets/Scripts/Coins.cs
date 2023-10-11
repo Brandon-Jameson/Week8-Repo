@@ -8,11 +8,15 @@ public class Coins : MonoBehaviour
 
     public void OnTriggerEnter(Collider collision)
     {
-        if(collision.gameObject.tag == "Player")
+        if(collision.gameObject.tag == "PlayerBlue")
         {
             Destroy(gameObject);
-            scoreKeeper.OnPickup();
-
+            scoreKeeper.OnPickupBlue();
+        }
+        else
+        {
+            Destroy(gameObject);
+            scoreKeeper.OnPickupRed();
         }
     }
 
