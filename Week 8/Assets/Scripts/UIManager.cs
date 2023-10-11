@@ -19,6 +19,6 @@ public class UIManager : MonoBehaviour
     private void Update()
     {
         score = scoreKeeper.Score;
-        scoreText.text = "Score: " + score;
+        scoreText.text = "Player 1 Score: " + score;
     }
 }
