@@ -35,6 +35,15 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""walk2"",
+                    ""type"": ""Value"",
+                    ""id"": ""057b1def-e498-4f86-bd3b-2d1a17fe14cd"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -92,6 +101,61 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""action"": ""walk"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""09e8a869-3595-45c3-8364-be59187c2a08"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""walk2"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""155d8e6d-638b-488a-bee7-4833e7008c90"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""walk2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""b52a3c8a-cefe-4595-8431-3c4a2f01d42b"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""walk2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""f913f022-657f-480f-b834-62f93a76bee4"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""walk2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""d9c76f5e-4507-472b-83fe-76543842e84f"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""walk2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -101,6 +165,7 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         // movement
         m_movement = asset.FindActionMap("movement", throwIfNotFound: true);
         m_movement_walk = m_movement.FindAction("walk", throwIfNotFound: true);
+        m_movement_walk2 = m_movement.FindAction("walk2", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -161,11 +226,13 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_movement;
     private IMovementActions m_MovementActionsCallbackInterface;
     private readonly InputAction m_movement_walk;
+    private readonly InputAction m_movement_walk2;
     public struct MovementActions
     {
         private @PlayerActions m_Wrapper;
         public MovementActions(@PlayerActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @walk => m_Wrapper.m_movement_walk;
+        public InputAction @walk2 => m_Wrapper.m_movement_walk2;
         public InputActionMap Get() { return m_Wrapper.m_movement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -178,6 +245,9 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 @walk.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnWalk;
                 @walk.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnWalk;
                 @walk.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnWalk;
+                @walk2.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnWalk2;
+                @walk2.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnWalk2;
+                @walk2.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnWalk2;
             }
             m_Wrapper.m_MovementActionsCallbackInterface = instance;
             if (instance != null)
@@ -185,6 +255,9 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 @walk.started += instance.OnWalk;
                 @walk.performed += instance.OnWalk;
                 @walk.canceled += instance.OnWalk;
+                @walk2.started += instance.OnWalk2;
+                @walk2.performed += instance.OnWalk2;
+                @walk2.canceled += instance.OnWalk2;
             }
         }
     }
@@ -192,5 +265,6 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
     public interface IMovementActions
     {
         void OnWalk(InputAction.CallbackContext context);
+        void OnWalk2(InputAction.CallbackContext context);
     }
 }
